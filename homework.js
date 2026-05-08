@@ -132,6 +132,9 @@ function calculateCartTotal(carts) {
  */
 function calculateSavings(carts) {
   // 請實作此函式
+
+  return calculateCartOriginalTotal(carts) - calculateCartTotal(carts); 
+  
 }
 
 /**
@@ -141,6 +144,9 @@ function calculateSavings(carts) {
  */
 function calculateCartItemCount(carts) {
   // 請實作此函式
+
+  return carts.reduce((total, cart) => total + cart.quantity,0 );
+
 }
 
 /**
@@ -151,6 +157,9 @@ function calculateCartItemCount(carts) {
  */
 function isProductInCart(carts, productId) {
   // 請實作此函式
+
+  return carts.some(cart => cart.product.id === productId);
+
 }
 
 // ========================================
