@@ -57,6 +57,8 @@ const orders = [
  */
 function getProductById(products, productId) {
   // 請實作此函式
+  return products.find((product) => product.id === productId) || null;
+
 }
 
 /**
@@ -67,6 +69,10 @@ function getProductById(products, productId) {
  */
 function getProductsByCategory(products, category) {
   // 請實作此函式
+  if(category === "全部"){
+    return products;
+  }
+  return products.filter(product => product.category === category)
 }
 
 /**
@@ -77,6 +83,8 @@ function getProductsByCategory(products, category) {
  */
 function getDiscountRate(product) {
   // 請實作此函式
+  const discount = Math.round((product.price / product.origin_price) * 100) / 10; 
+  return `${discount} 折`;
 }
 
 /**
@@ -86,6 +94,9 @@ function getDiscountRate(product) {
  */
 function getAllCategories(products) {
   // 請實作此函式
+  const categories = products.map(product => product.category);
+  return [...new Set(categories)];
+
 }
 
 // ========================================
@@ -95,10 +106,12 @@ function getAllCategories(products) {
 /**
  * 1. 計算購物車原價總金額
  * @param {Array} carts - 購物車陣列
- * @returns {number} - 回傳數字（原價 × 數量 的總和）
+ * @returns {number} - 回傳數字（原價 × 數量 的總和） 
  */
 function calculateCartOriginalTotal(carts) {
   // 請實作此函式
+  return carts.reduce(
+    (total, cart) => total + cart.product.origin_price * cart.quantity, 0)
 }
 
 /**
@@ -108,6 +121,8 @@ function calculateCartOriginalTotal(carts) {
  */
 function calculateCartTotal(carts) {
   // 請實作此函式
+  return carts.reduce(
+    (total, cart) => total + cart.product.price * cart.quantity, 0)  
 }
 
 /**
